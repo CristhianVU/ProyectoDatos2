@@ -24,3 +24,14 @@ class TablaDeSimbolos:
                 self.tabla[indice][i] = (clave, valor)
                 return
         self.tabla[indice].append((clave, valor))
+
+    def modificar(self, clave, nuevo_valor):
+        indice = self._hash(clave)
+        for i, (k, v) in enumerate(self.tabla[indice]):
+            if k == clave:
+                self.tabla[indice][i] = (clave, nuevo_valor)
+                return
+        if self.tabla_padre:
+            self.tabla_padre.modificar(clave, nuevo_valor)
+        else:
+            raise KeyError(f"La clave '{clave}' no existe en la tabla de símbolos.")
