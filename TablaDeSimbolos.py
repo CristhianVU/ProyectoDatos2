@@ -35,3 +35,14 @@ class TablaDeSimbolos:
             self.tabla_padre.modificar(clave, nuevo_valor)
         else:
             raise KeyError(f"La clave '{clave}' no existe en la tabla de símbolos.")
+
+    def borrar(self, clave):
+        indice = self._hash(clave)
+        for i, (k, v) in enumerate(self.tabla[indice]):
+            if k == clave:
+                del self.tabla[indice][i]
+                return
+        if self.tabla_padre:
+            self.tabla_padre.borrar(clave)
+        else:
+            raise KeyError(f"La clave '{clave}' no existe en la tabla de símbolos.")
