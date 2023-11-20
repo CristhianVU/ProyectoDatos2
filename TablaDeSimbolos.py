@@ -16,3 +16,11 @@ class TablaDeSimbolos:
         if self.tabla_padre:
             return self.tabla_padre.buscar(clave)
         return False
+
+    def insertar(self, clave, valor):
+        indice = self._hash(clave)
+        for i, (k, v) in enumerate(self.tabla[indice]):
+            if k == clave:
+                self.tabla[indice][i] = (clave, valor)
+                return
+        self.tabla[indice].append((clave, valor))
